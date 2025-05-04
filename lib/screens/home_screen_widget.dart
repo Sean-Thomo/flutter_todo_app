@@ -71,32 +71,49 @@ class AddTaskSheet extends StatelessWidget {
           children: [
             TextField(
               controller: controller,
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                hintText: 'Enter item',
-                hintStyle: TextStyle(color: Colors.white),
-                border: UnderlineInputBorder(),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red),
+              style: GoogleFonts.inter(
+                color: Colors.white,
+                fontWeight: FontWeight.w400,
+              ),
+              decoration: InputDecoration(
+                hintText: 'Add a new task...',
+                hintStyle: GoogleFonts.inter(
+                  color: Colors.white70,
+                  fontWeight: FontWeight.w400,
+                ),
+                filled: true,
+                fillColor: const Color.fromARGB(255, 58, 58, 58),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(
+                    color: Color(0xFF636366),
+                    width: 1.5,
+                  ),
+                ),
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.send_rounded, color: Colors.red),
+                  onPressed: () {
+                    if (controller.text.isNotEmpty) {
+                      onSave(controller.text);
+                      controller.clear();
+                    }
+                  },
                 ),
               ),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-              ),
-              onPressed: () {
-                if (controller.text.isNotEmpty) {
-                  onSave(controller.text);
-                  Navigator.pop(context);
+              onSubmitted: (value) {
+                if (value.isNotEmpty) {
+                  onSave(value);
+                  controller.clear();
                 }
               },
-              child: const Text('Save'),
             ),
           ],
         ),
@@ -112,7 +129,7 @@ class EmptyState extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        'Add your first task',
+        'Add your first task.',
         style: GoogleFonts.montserrat(color: Colors.white),
       ),
     );

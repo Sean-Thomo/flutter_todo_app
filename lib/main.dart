@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'widgets/home_screen_widget.dart';
-import 'widgets/inbox_screen_widget.dart';
-import 'widgets/search_screen_widget.dart';
+import 'screens/home_screen_widget.dart';
+import 'screens/inbox_screen_widget.dart';
+import 'screens/search_screen_widget.dart';
 
 void main() {
   runApp(const MyApp());
