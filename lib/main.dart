@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen_widget.dart';
-import 'screens/inbox_screen_widget.dart';
+import 'screens/timer_screen_widget.dart';
 import 'screens/search_screen_widget.dart';
 
 void main() {
@@ -32,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedWidget = 0;
 
-  final List<Widget> _screens = [HomeWidget(), SearchScreen(), InboxScreen()];
+  final List<Widget> _screens = [HomeWidget(), SearchScreen(), TimerScreen()];
 
   void _widgetTapped(int index) {
     setState(() {
@@ -51,10 +51,10 @@ class _MyHomePageState extends State<MyHomePage> {
         unselectedItemColor: Colors.white,
         selectedFontSize: 0,
         unselectedFontSize: 0,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.inbox), label: ''),
+        items: [
+          const BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+          BottomNavigationBarItem(icon: const Icon(Icons.search), label: ''),
+          const BottomNavigationBarItem(icon: Icon(Icons.timer), label: ''),
         ],
         currentIndex: _selectedWidget,
         onTap: _widgetTapped,

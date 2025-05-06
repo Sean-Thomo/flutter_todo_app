@@ -39,8 +39,8 @@ class _HomeWidgetState extends State<HomeWidget> {
       ),
       body: _tasks.isEmpty ? const EmptyState() : TaskList(tasks: _tasks),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: Colors.red,
+        foregroundColor: Colors.white,
         onPressed: _openAddItemWidget,
         tooltip: 'Add Item',
         child: const Icon(Icons.add),
@@ -70,6 +70,7 @@ class AddTaskSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
+              autofocus: true,
               controller: controller,
               style: GoogleFonts.inter(
                 color: Colors.white,
@@ -82,7 +83,7 @@ class AddTaskSheet extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
                 filled: true,
-                fillColor: const Color.fromARGB(255, 58, 58, 58),
+                fillColor: Colors.grey[800],
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -93,10 +94,7 @@ class AddTaskSheet extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(
-                    color: Color(0xFF636366),
-                    width: 1.5,
-                  ),
+                  borderSide: const BorderSide(color: Colors.red, width: 1.5),
                 ),
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.send_rounded, color: Colors.red),
@@ -104,6 +102,7 @@ class AddTaskSheet extends StatelessWidget {
                     if (controller.text.isNotEmpty) {
                       onSave(controller.text);
                       controller.clear();
+                      Navigator.pop(context);
                     }
                   },
                 ),
@@ -112,6 +111,7 @@ class AddTaskSheet extends StatelessWidget {
                 if (value.isNotEmpty) {
                   onSave(value);
                   controller.clear();
+                  Navigator.pop(context);
                 }
               },
             ),

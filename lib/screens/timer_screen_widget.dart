@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class InboxScreen extends StatefulWidget {
-  const InboxScreen({super.key});
+class TimerScreen extends StatefulWidget {
+  const TimerScreen({super.key});
 
   @override
-  State<InboxScreen> createState() => _InboxScreenState();
+  State<TimerScreen> createState() => _TimerScreenState();
 }
 
-class _InboxScreenState extends State<InboxScreen> {
+class _TimerScreenState extends State<TimerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,11 +17,11 @@ class _InboxScreenState extends State<InboxScreen> {
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
         centerTitle: true,
-        title: Text('Inbox', style: GoogleFonts.montserrat()),
+        title: Text('Timer', style: GoogleFonts.montserrat()),
       ),
       body: Center(
         child: Text(
-          'Inbox Screen',
+          'Timer Screen',
           style: GoogleFonts.inter(color: Colors.white, fontSize: 24),
         ),
       ),
