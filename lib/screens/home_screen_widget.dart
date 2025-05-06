@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'item_widget.dart';
+import '../widgets/task_list_widget.dart';
+import '../widgets/empty_tasks_widget.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({super.key});
@@ -118,36 +119,6 @@ class AddTaskSheet extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class EmptyState extends StatelessWidget {
-  const EmptyState({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Add your first task.',
-        style: GoogleFonts.montserrat(color: Colors.white),
-      ),
-    );
-  }
-}
-
-class TaskList extends StatelessWidget {
-  final List<String> tasks;
-
-  const TaskList({super.key, required this.tasks});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: tasks.length,
-      itemBuilder: (context, index) {
-        return ItemWidget(key: ValueKey(index), task: tasks[index]);
-      },
     );
   }
 }
