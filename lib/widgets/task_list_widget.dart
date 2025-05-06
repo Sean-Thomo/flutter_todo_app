@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'item_widget.dart';
+import '../models/task.dart';
 
 class TaskList extends StatelessWidget {
-  final List<String> tasks;
+  final List<Task> tasks;
 
   const TaskList({super.key, required this.tasks});
 
@@ -11,7 +12,7 @@ class TaskList extends StatelessWidget {
     return ListView.builder(
       itemCount: tasks.length,
       itemBuilder: (context, index) {
-        return ItemWidget(key: ValueKey(index), task: tasks[index]);
+        return ItemWidget(key: ValueKey(index), task: tasks[index].title);
       },
     );
   }

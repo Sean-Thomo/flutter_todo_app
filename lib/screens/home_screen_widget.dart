@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import '../models/task.dart';
 import '../widgets/task_list_widget.dart';
 import '../widgets/empty_tasks_widget.dart';
+import '../providers/task_provider.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({super.key});
@@ -11,25 +14,10 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  final List<String> _tasks = [];
-
-  void _addTask(String task) {
-    setState(() {
-      _tasks.add(task);
-    });
-  }
-
-  void _openAddItemWidget() {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return AddTaskSheet(onSave: _addTask);
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    final taskProvider = Provider.of<TaskProvider>(context);
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -38,11 +26,25 @@ class _HomeWidgetState extends State<HomeWidget> {
         centerTitle: true,
         title: Text('Today', style: GoogleFonts.montserrat()),
       ),
-      body: _tasks.isEmpty ? const EmptyState() : TaskList(tasks: _tasks),
+      body:
+          taskProvider.tasks.isEmpty
+              ? const EmptyState()
+              : TaskList(tasks: taskProvider.tasks),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.red,
         foregroundColor: Colors.white,
-        onPressed: _openAddItemWidget,
+        onPressed: () {
+          showModalBottomSheet(
+            builder: (context) {
+              return AddTaskSheet(
+                onSave: (String taskTitle) {
+                  taskProvider.addTask(Task(title: taskTitle));
+                },
+              );
+            },
+            context: context,
+          );
+        },
         tooltip: 'Add Item',
         child: const Icon(Icons.add),
       ),
