@@ -12,7 +12,19 @@ class TaskList extends StatelessWidget {
     return ListView.builder(
       itemCount: tasks.length,
       itemBuilder: (context, index) {
-        return ItemWidget(key: ValueKey(index), task: tasks[index].title);
+        return ItemWidget(
+          key: ValueKey(index),
+          task: tasks[index].title, // Pass the task title
+          isDone: tasks[index].isDone, // Pass the completion state
+          onChanged: (value) {
+            // Handle checkbox state change
+            tasks[index].isDone = value ?? false;
+          },
+          onDelete: () {
+            // Handle task deletion
+            tasks.removeAt(index);
+          },
+        );
       },
     );
   }

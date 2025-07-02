@@ -3,14 +3,32 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ItemWidget extends StatefulWidget {
   final String task;
-  const ItemWidget({super.key, required this.task});
+  final bool isDone;
+  // final String? description;
+  final ValueChanged<bool?>? onChanged;
+  final VoidCallback? onDelete;
+
+  const ItemWidget({
+    super.key,
+    required this.task,
+    this.isDone = false,
+    this.onChanged,
+    // this.description,
+    this.onDelete,
+  });
 
   @override
   ItemWidgetState createState() => ItemWidgetState();
 }
 
 class ItemWidgetState extends State<ItemWidget> {
-  bool _isSelected = false;
+  late bool isDone = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isDone = widget.isDone;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +37,7 @@ class ItemWidgetState extends State<ItemWidget> {
         widget.task,
         style: GoogleFonts.inter(
           color: Colors.white,
-          decoration: _isSelected ? TextDecoration.lineThrough : null,
+          decoration: isDone ? TextDecoration.lineThrough : null,
           decorationColor: Colors.white,
           decorationThickness: 2,
         ),
@@ -27,12 +45,16 @@ class ItemWidgetState extends State<ItemWidget> {
       controlAffinity: ListTileControlAffinity.leading,
       checkColor: Colors.red,
       activeColor: Colors.white,
-      value: _isSelected,
-      onChanged: (bool? value) {
-        setState(() {
-          _isSelected = value!;
-        });
-      },
+      value: isDone,
+      onChanged:
+          (_) => setState(() {
+            isDone = !isDone;
+          }),
+      secondary: IconButton(
+        color: Colors.red,
+        icon: const Icon(Icons.delete),
+        onPressed: widget.onDelete,
+      ),
     );
   }
 }
